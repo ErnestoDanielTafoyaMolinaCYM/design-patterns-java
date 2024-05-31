@@ -1,5 +1,8 @@
 package designpatterns;
 
+import designpatterns.Builder.NormalPersonBuilder;
+import designpatterns.Builder.Person;
+import designpatterns.Builder.PersonDirector;
 import designpatterns.Decorator.CommercialInfoProductDecorator;
 import designpatterns.Decorator.HTMLProductDecorator;
 import designpatterns.Decorator.ProductComponent;
@@ -9,15 +12,42 @@ import designpatterns.Observer.ISubject;
 import designpatterns.Observer.Observer;
 import designpatterns.Observer.Subject;
 
+
+
 public class DesignPatterns {
     
 
     public static void main(String[] args) {
-        
+        builder();
 
     }
     
-    public void observable(){
+    public static void builder(){
+        
+        final NormalPersonBuilder personBuilder = new NormalPersonBuilder();
+        final Person daniel = personBuilder
+                                     .setName("Daniel")
+                                     .setLastName("Molina")
+                                     .addHobbie("Comer")
+                                     .addHobbie("Jugar")
+                                     .build();
+        System.out.println(daniel.getFullName());
+        
+        final Person juan = personBuilder
+                                     .setName("Juan")
+                                     .setLastName("Perez")
+                                     .build();
+        System.out.println(juan.toString());
+        
+        //creación con director
+        final PersonDirector director = new PersonDirector(personBuilder);
+        director.createSimplePerson("Jhon", "Cena");
+        Person JhonCena = personBuilder.build();
+        System.out.println(JhonCena.getFullName());
+        
+    }
+    
+    public static void observable(){
         
         final ISubject<Number> subject = new Subject<>();
         final IObserver<Number> obs1 = new Observer<>((n)->{
@@ -42,7 +72,7 @@ public class DesignPatterns {
         
         subject2.notify("EsTe MeNsAjE sE vE hOrRiBlE");
     }
-    public void decorator(){
+    public static void decorator(){
         final ProductComponent cerveza = new ProductComponent("Cerveza");
         System.out.println( cerveza.getDetail() );
         
