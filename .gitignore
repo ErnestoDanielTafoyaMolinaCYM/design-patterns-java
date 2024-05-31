@@ -1,0 +1,12 @@
+# Directorios generados por NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Archivos de configuración de NetBeans
+nbproject/project.xml
+nbproject/private/
+nbproject/build-impl.xml
